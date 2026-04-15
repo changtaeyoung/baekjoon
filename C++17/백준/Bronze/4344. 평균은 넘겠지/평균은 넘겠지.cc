@@ -23,8 +23,7 @@ int main(void) {
 				cnt++;
 			}
 		}
-		cout << fixed;
-		cout.precision(2);
+
 		cout << 100.0 * cnt / stu << "%" << endl;
 	}
 	return 0;
