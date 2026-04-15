@@ -1,33 +1,27 @@
 #include <iostream>
+#include <algorithm>
+#include <stack>
 #include <string>
 
 using namespace std;
 
 int main(void) {
-	string str;
-	bool isPel = false;
-
-	while (true) {
+	string str, revstr;
+	while (1) {
 		cin >> str;
+		for (int i = str.length() - 1; i >= 0; i--) {
+			revstr+= str[i];
+		}
 		if (str == "0") {
 			break;
 		}
-
-		for (int i = 0; i < str.length(); i++) {
-			if (str[i] == str[str.length() - 1 - i]) {
-				isPel = true;
-			}
-			else {
-				isPel = false;
-				break;
-			}
-		}
-
-		if (isPel) {
-			cout << "yes" << '\n';
+		else if (str.compare(revstr) == 0) {
+			cout << "yes" << "\n";
 		}
 		else {
-			cout << "no" << '\n';
+			cout << "no" << "\n";
 		}
-	}
+		revstr = "";
+	}	
+	return 0;
 }
