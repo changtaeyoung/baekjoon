@@ -1,33 +1,32 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-vector<int> adj[101];
-bool virus[101] = {false,};
-int cnt = 0;
+int computer[101][101] = { 0, };
+bool virus[101];
+int com, edges, cnt = 0;
 
 void dfs(int v) {
-    virus[v] = true;
-    for (int next : adj[v]) {
-        if (!virus[next]) {
-            cnt++;
-            dfs(next);
-        }
-    }
+	virus[v] = true;
+	
+	for (int i = 1; i <= com; i++) {
+		if (!virus[i] && computer[v][i] == 1) {
+			dfs(i);
+			cnt++;
+		}
+	}
 }
 
-int main() {
-    int vertex_num, edge_num;
-    cin >> vertex_num >> edge_num;
+int main(void) {
+	int c1, c2;
+	cin >> com >> edges;
 
-    for (int i = 0; i < edge_num; i++) {
-        int v1, v2;
-        cin >> v1 >> v2;
-        adj[v1].push_back(v2);
-        adj[v2].push_back(v1);
-    }
+	for (int i = 0; i < edges; i++) {
+		cin >> c1 >> c2;
+		computer[c1][c2] = 1;
+		computer[c2][c1] = 1;
+	}
 
-    dfs(1);
-    cout << cnt;
+	dfs(1);
+	cout << cnt;
 }
