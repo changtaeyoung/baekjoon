@@ -1,24 +1,29 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
+bool cmp(int a, int b) {
+	return a > b;
+}
+
 int main(void) {
-	queue<int> card_arr;
-	int card;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 
-	cin >> card;
+	int n;
+	cin >> n;
 
-	for (int i = 1; i <= card; i++) {
-		card_arr.push(i);
+	queue<int> q;
+	for (int i = 1; i <= n; i++) {
+		q.push(i);
 	}
-
-	while (card_arr.size() > 1) {
-		card_arr.pop();
-		int tmp = card_arr.front();
-		card_arr.pop();
-		card_arr.push(tmp);
+	while (q.size() > 1) {
+		q.pop();
+		q.push(q.front());
+		q.pop();
 	}
-
-	cout << card_arr.front();
+	cout << q.front();
+	return 0;
 }
