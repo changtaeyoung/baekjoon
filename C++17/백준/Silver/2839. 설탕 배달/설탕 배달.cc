@@ -1,25 +1,25 @@
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
 int main(void) {
-	int weight;
+	int n;
+	cin >> n;
 	int x, y;
-	cin >> weight;
-	x = weight / 5;
-
+	x = n / 5;
 	while (true) {
 		if (x < 0) {
-			cout << "-1" << endl;
-			break;
+			cout << "-1";
+			return 0;
 		}
-
-		if ((weight - (5 * x)) % 3 == 0) {
-			y = (weight - (5 * x)) / 3;
-			cout << x + y << endl;
+		if ((n - (5 * x)) % 3 == 0) {
+			y = (n - (5 * x)) / 3;
 			break;
 		}
 		x--;
 	}
+	cout << x + y;
 	return 0;
 }
