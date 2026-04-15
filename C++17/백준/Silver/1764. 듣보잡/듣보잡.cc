@@ -1,48 +1,53 @@
 #include <iostream>
 #include <string>
-#include <set>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
+vector<string> notListen;
+vector<string> notSee;
+vector<string> notSeenLis;
+
 int main(void) {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
 
-	int notL_person, notS_person;
+	int n, m, cnt = 0;
 	string name;
-	set<string> notL_arr, notS_arr, notLS_arr;
-
-	cin >> notL_person >> notS_person;
-
-	for (int i = 0; i < notL_person; i++) {
+	cin >> n >> m;
+	for (int i = 0; i < n; i++) {
 		cin >> name;
-		notL_arr.insert(name);
+		notListen.push_back(name);
 	}
 
-	for (int i = 0; i < notS_person; i++) {
+	for (int i = 0; i < m; i++) {
 		cin >> name;
-		notS_arr.insert(name);
+		notSee.push_back(name);
 	}
-	
-	if (notL_arr.size() < notS_arr.size()) {
-		for (const auto& elem: notL_arr) {
-			if (notS_arr.find(elem) != notS_arr.end()) {
-				notLS_arr.insert(elem);
+	sort(notListen.begin(), notListen.end());
+	sort(notSee.begin(), notSee.end());
+
+	if (notListen.size() > notSee.size()) {
+		for (int i = 0; i < m; i++) {
+			if (binary_search(notListen.begin(), notListen.end(), notSee[i])) {
+				notSeenLis.push_back(notSee[i]);
+				cnt++;
 			}
 		}
 	}
 	else {
-		for (const auto& elem : notS_arr) {
-			if (notL_arr.find(elem) != notL_arr.end()) {
-				notLS_arr.insert(elem);
+		for (int i = 0; i < n; i++) {
+			if (binary_search(notSee.begin(), notSee.end(), notListen[i])) {
+				notSeenLis.push_back(notListen[i]);
+				cnt++;
 			}
 		}
 	}
+	cout << cnt << "\n";
 
-	cout << notLS_arr.size() << '\n';
-	for (const auto& elem : notLS_arr) {
-		cout << elem << '\n';
+	for (int i = 0; i < notSeenLis.size(); i++) {
+		cout << notSeenLis[i] << "\n";
 	}
-	
+	return 0;
 }
