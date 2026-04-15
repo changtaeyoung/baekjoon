@@ -2,26 +2,26 @@
 
 using namespace std;
 
-int numbering[11] = { 0, };
-
-void precomputing() {
-	numbering[1] = 1;
-	numbering[2] = 2;
-	numbering[3] = 4;
-
-	for (int i = 4; i < 11; i++) {
-		numbering[i] = numbering[i - 3] + numbering[i - 2] + numbering[i - 1];
+int fuc(int num) {
+	if (num == 1) {
+		return 1;
 	}
+	else if (num == 2) {
+		return 2;
+	}
+	else if (num == 3) {
+		return 4;
+	}
+	return(fuc(num - 1) + fuc(num - 2) + fuc(num - 3));
 }
 
 int main(void) {
-	int test, num;
-	cin >> test;
-
-	precomputing();
-
-	for (int i = 0; i < test; i++) {
+	int n;
+	cin >> n;
+	int num;
+	for (int i = 0; i < n; i++) {
 		cin >> num;
-		cout << numbering[num] << '\n';
+		cout << fuc(num) << "\n";
 	}
+	return 0;
 }
