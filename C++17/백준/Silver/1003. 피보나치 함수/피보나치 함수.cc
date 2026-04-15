@@ -2,27 +2,21 @@
 
 using namespace std;
 
-int zero[41] = { 1,0, };
-int one[41] = { 0,1, };
-
-void computing() {
-	for (int j = 2; j <= 40; j++) {
-		zero[j] = zero[j - 1] + zero[j - 2];
-		one[j] = one[j - 1] + one[j - 2];
-	}
-}
-
-int main(void){
-	ios::sync_with_stdio(false);
+int main(void) {
 	cin.tie(NULL);
+	ios::sync_with_stdio(false);
+	int N, T;
+	cin >> T;
+	int z[41] = { 1,0, };
+	int o[41] = { 0,1, };
 
-	computing();
-	int test, number;
-	cin >> test;
-
-	for (int i = 0; i < test; i++) {
-		cin >> number;
-		cout << zero[number] << " " << one[number] << '\n';
+	for (int i = 0; i < T; i++) {
+		cin >> N;
+		for (int j = 2; j <= N; j++) {
+			z[j] = z[j - 1] + z[j - 2];
+			o[j] = o[j - 1] + o[j - 2];
+		}
+		cout << z[N] << " " << o[N] << "\n";
 	}
-
+	return 0;
 }
