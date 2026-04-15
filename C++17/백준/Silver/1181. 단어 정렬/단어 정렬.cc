@@ -1,37 +1,28 @@
 #include <iostream>
-#include <string>
 #include <vector>
-#include <set>
 #include <algorithm>
 
 using namespace std;
 
-bool compare(const string& a, const string& b) {
-	if (a.length() == b.length()) {
-		return a < b;
-	}
-	return a.length() < b.length();
+bool compareWith(string a, string b){
+  if(a.length() == b.length())
+    return a<b;
+  return a.length()<b.length();
 }
 
-int main(void) {
-	int test_times;
-	string str;
-	set<string> str_set;
-	vector<string> str_arr;
+int main(){
+  int N;
+  vector<string> vec;  
+  cin>>N;
+  for(int i=0; i<N; i++){
+    string str;
+    cin>>str;
+    if(find(vec.begin(), vec.end(), str) == vec.end())
+      vec.push_back(str);
+  }
+  sort(vec.begin(), vec.end(), compareWith);
 
-	cin >> test_times;
-
-	for (int i = 0; i < test_times; i++) {
-		cin >> str;
-		if (str_set.find(str) == str_set.end()) {
-			str_set.insert(str);
-			str_arr.push_back(str);
-		}
-	}
-
-	sort(str_arr.begin(), str_arr.end(), compare);
-
-	for (int i = 0; i < str_arr.size(); i++) {
-		cout << str_arr[i] << '\n';
-	}
+  for(int i=0; i<vec.size(); i++){
+    cout<<vec[i]<<'\n';
+  }
 }
